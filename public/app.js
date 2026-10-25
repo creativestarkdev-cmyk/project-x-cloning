@@ -1,30 +1,22 @@
-const Post_box_fomo = document.getElementById('post-box-fomo');
-const Post_btn_fomo = document.getElementById('post-btn_fomo');
+const direct_post_box = document.getElementById('direct_post_box');
+const Post_btn = document.getElementById('post-btn_fomo');
 const cross_btn_fomo = document.getElementById('cross_btn_fomo');
-Post_btn_fomo.addEventListener('click', () => {
-Post_box_fomo.classList.remove('hidden'); 
-Post_box_fomo.classList.add('overflow-hidden', 'block'); 
+Post_btn.addEventListener('click', () => {
+ 
+direct_post_box.classList.remove('max-[500px]:hidden'); 
+// direct_post_box.classList.add(''); 
+direct_post_box.classList.add('overflow-hidden', '!flex'); 
 });
 
 cross_btn_fomo.addEventListener('click', () => {
-Post_box_fomo.classList.remove('overflow-hidden', 'block'); 
-Post_box_fomo.classList.add('hidden'); 
+direct_post_box.classList.remove('overflow-hidden', '!flex'); 
+direct_post_box.classList.add('max-[500px]:hidden'); 
 });
 
-function showPostContent(myContent) {
-
-   const show_post_content_box = document.querySelector('.show-post-content');
-   const show_post_content_box_fomo = document.querySelector('#show-post-content_fomo');
-   if(Post_box_fomo.classList.contains('block')){
-        show_post_content_box_fomo.appendChild(myContent);
-   }else{
-        show_post_content_box.appendChild(myContent);
-   }
-   
-}
 
 const allMediaFiles = [];
 const postMedia = document.getElementById("postMedia");
+const show_post_content_box = document.querySelector('.show-post-content');
 postMedia.addEventListener("change", (e) => {
 
     for (let i = 0; i < e.target.files.length; i++) {
@@ -41,7 +33,7 @@ postMedia.addEventListener("change", (e) => {
                     controls: true,
                     className: 'show-post-content-value'
                 });
-                showPostContent(myVideo);
+                show_post_content_box.appendChild(myVideo);
 
             } else if (mediafile_type === "image") {
                 let mypic = document.createElement('img');
@@ -50,7 +42,7 @@ postMedia.addEventListener("change", (e) => {
                     controls: true,
                     className: 'show-post-content-value'
                 });
-                showPostContent(mypic);
+                show_post_content_box.appendChild(mypic);
 
             }
         } else {
@@ -77,10 +69,7 @@ myForm.addEventListener('submit', async (e) => {
     const formData = new FormData();
 
     // post ki title uthaya
-    let title = document.getElementById("post-title").value; //title ki value nikala
-    if(title.trim() === ""){
-        title = document.getElementById("post-title_fomo").value;
-    }
+    const title = document.getElementById("post-title").value; //title ki value nikala
     alert("post title: " + title)
     formData.append('title', title);
     // post ki allMediaFiles uthaya
